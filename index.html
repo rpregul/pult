@@ -929,7 +929,8 @@ function viewToday(){
 }
 
 function viewVideos(){
-  const vids=activeNiche==="all"?state.videos:state.videos.filter(v=>v.niche===activeNiche);
+  const dnum=d=>{const p=(d||"").split(".").map(Number);return (p[1]||0)*100+(p[0]||0);};
+  const vids=(activeNiche==="all"?[...state.videos]:state.videos.filter(v=>v.niche===activeNiche)).sort((a,b)=>dnum(b.date)-dnum(a.date));
   const list=vids.length? vids.map(v=>{
     const n=niche(v.niche);
     const badges=state.platforms.filter(p=>v.targets[p.id]).map(p=>`<span class="mini-badge">${p.code}</span>`).join("");
