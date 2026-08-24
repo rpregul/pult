@@ -2,6 +2,9 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="robots" content="noindex, nofollow">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -72,6 +75,9 @@
     letter-spacing:.1em;text-transform:uppercase;padding:6px 11px;border-radius:99px;
     background:rgba(var(--mint-rgb),.10);border:1px solid rgba(var(--mint-rgb),.3)}
   .live i{width:6px;height:6px;border-radius:50%;background:var(--mint);box-shadow:0 0 8px 1px var(--mint);animation:pulse 2s infinite}
+  .refresh-btn{flex:0 0 auto;width:38px;height:38px;margin-left:8px;border-radius:11px;border:1px solid var(--brd-2);background:rgba(var(--neon-rgb),.10);color:var(--neon);display:grid;place-items:center;box-shadow:0 0 14px -6px rgba(var(--neon-rgb),.7);transition:.25s}
+  .refresh-btn svg{width:19px;height:19px}
+  .refresh-btn:active{transform:rotate(-180deg) scale(.9)}
   .live[data-mode="warn"]{color:var(--amber);border-color:rgba(var(--amber-rgb),.45);background:rgba(var(--amber-rgb),.10)}
   .live[data-mode="warn"] i{background:var(--amber);box-shadow:0 0 8px 1px var(--amber)}
   @keyframes pulse{50%{opacity:.35}}
@@ -399,6 +405,7 @@
     <div class="bar">
       <div class="brand"><b>ПУЛЬТ<span class="dot"></span></b><span>выкладка</span></div>
       <div class="live" id="live"><i></i><span id="liveT">эфир</span></div>
+      <button class="refresh-btn" onclick="location.replace(location.pathname+'?r='+Date.now())" aria-label="Обновить" title="Обновить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg></button>
     </div>
     <div class="niches" id="niches"></div>
   </header>
