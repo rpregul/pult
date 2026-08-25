@@ -442,11 +442,13 @@ const ICONS={
   bolt:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>',
   chev:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>',
 };
-const NICHE_COLOR={tarot:"#C061FF", neuro:"#4D7CFF", tom:"#C81E3A"};
+const NICHE_COLOR={tarot:"#C061FF", neuro:"#4D7CFF", tom:"#C81E3A", andrew:"#2140C8", jerry:"#B5560E"};
 const THUMB_GRAD={
   tarot:"linear-gradient(150deg,#C061FF,#5a1f8f)",
   neuro:"linear-gradient(150deg,#4D7CFF,#1c2f8f)",
   tom:"linear-gradient(150deg,#C81E3A,#5c0f0a)",
+  andrew:"linear-gradient(150deg,#2140C8,#101e5c)",
+  jerry:"linear-gradient(150deg,#B5560E,#5c2a06)",
 };
 const mKey=()=>new Date().toLocaleDateString("en-CA",{timeZone:"Europe/Moscow"});
 const mShort=()=>new Date().toLocaleDateString("ru-RU",{timeZone:"Europe/Moscow",day:"2-digit",month:"2-digit"});
@@ -460,6 +462,8 @@ const mTime=()=>new Date().toLocaleTimeString("ru-RU",{timeZone:"Europe/Moscow",
 const CONTENT={
   niches:[
     {id:"tom",name:"Том",tag:"опционы"},
+    {id:"andrew",name:"Эндрю",tag:"опционы"},
+    {id:"jerry",name:"Джерри",tag:"опционы"},
     {id:"tarot",name:"Таро",tag:"эзотерика"},
     {id:"neuro",name:"ИИ",tag:"Нейро·Утро"},
   ],
@@ -473,6 +477,8 @@ const CONTENT={
   ],
   cadence:{
     tom:{ig:"1/день",yt:"1/день",tt:"1/день"},
+    andrew:{ig:"1/день",yt:"1/день",tt:"1/день"},
+    jerry:{ig:"1/день",yt:"1/день",tt:"1/день"},
     tarot:{ig:"1/день",ig2:"1/день",yt:"1/день",tt:"1/день",tt2:"1/день",vk:"1/день"},
     neuro:{ig:"1/день",yt:"1/день",tt:"1/день",vk:"1/день"},
   },
@@ -496,6 +502,34 @@ const CONTENT={
            first:"Right and still lost money? Comment 'me' 👇"},
        tt:{caption:"You cash small wins and hold losers till they bleed 💀 that's why you're down, and it's not your strategy. One rule flips it, and it's all in my profile.\n\nRight on the trade and still lost? Comment 'me' 👇\n\n#options #optionstrading #trading #stockmarket #fyp #foryou #tradingpsychology #money",
            first:"Right and still lost? Drop a 'me' 👇"},
+     }},
+    {id:"andrew-smallwins",niche:"andrew",title:"Small wins, big losses — почему счёт тает (Эндрю)",date:"25.08",
+     files:{reel:{name:"andrew_2026-08-25_smallwins_{ig,tt,yt}.mp4 (газета, синий акцент)",loc:"~/YouTube/options/reel-01-90options/andrew/ → залить в TG Склад"},
+            cover:{name:"andrew_2026-08-25_smallwins_cover.jpg",loc:"там же"}},
+     note:"🔵 Персона Эндрю (свой блог, воронка). Газета + синий акцент, лицо Эндрю, голос выше тоном. Тексты EN — уникальные, НЕ как у Тома/Джерри. ⚠️ TikTok: публичные комменты без ссылок — CTA «in my profile». Вовлечение=«me».",
+     targets:{
+       ig:{caption:"Quick gut check: you grab a $40 win in seconds, but you'll sit on a $300 loss for weeks 'hoping.' That math is exactly why you're down.\n\nIt's not your entries, it's what you do after. The one rule that fixes it is in my profile.\n\nDone this before? Comment 'me' 👇\n\n#optionstrading #trading #stockmarket #daytrading #tradingpsychology #stocks #investing #wallstreet",
+           first:"Comment 'me' if you've held a loser too long 👇 the rule's in my profile."},
+       yt:{ttl:"🚨 Your $40 Wins Can't Cover Your $300 Losses 📉😅",
+           tags:"options trading, trading psychology, day trading, cut your losses, stock market, trading for beginners, how to trade, risk management, stocks, wall street",
+           caption:"You cash tiny wins fast and let big losses ride. That's the math draining your account. The fix is one rule, and it's in my profile.\n\nComment 'me' if this is you 👇\n\n#shorts #optionstrading #trading #stockmarket #tradingpsychology",
+           first:"Comment 'me' if you've held a loser too long 👇"},
+       tt:{caption:"$40 win? Gone in 2 seconds. $300 loss? 'It'll come back' for 3 weeks 😭 that's the whole problem. Fix's in my profile.\n\nComment 'me' if that's you 👇\n\n#optionstrading #trading #stockmarket #fyp #foryou #tradingpsychology #stocktok",
+           first:"Comment 'me' if you've done this 👇"},
+     }},
+    {id:"jerry-smallwins",niche:"jerry",title:"Small wins, big losses — почему счёт тает (Джерри)",date:"25.08",
+     files:{reel:{name:"jerry_2026-08-25_smallwins_{ig,tt,yt}.mp4 (газета, оранжевый акцент)",loc:"~/YouTube/options/reel-01-90options/jerry/ → залить в TG Склад"},
+            cover:{name:"jerry_2026-08-25_smallwins_cover.jpg",loc:"там же"}},
+     note:"🟠 Персона Джерри (свой блог, воронка). Газета + оранжевый акцент, лицо Джерри, голос ниже тоном. Тексты EN — уникальные, спокойно-прямой тон. ⚠️ TikTok: комменты без ссылок — CTA «in my profile». Вовлечение=«me».",
+     targets:{
+       ig:{caption:"Here's the uncomfortable part: you're not losing because you pick bad trades. You're losing because you cut winners early and let losers run until they hurt.\n\nSame chart, opposite behavior. One rule flips it, and it's in my profile.\n\nBe honest with yourself, comment 'me' if you've done it 👇\n\n#trading #optionstrading #stockmarket #tradingpsychology #investing #riskmanagement #stocks #markets",
+           first:"No judgment, comment 'me' if you've let a loss run too long 👇 the rule's in my profile."},
+       yt:{ttl:"😬 The Real Reason You Lose Money Trading (It's Not Strategy) 📊",
+           tags:"trading psychology, options trading, why you lose money trading, cut losses let winners run, stock market, day trading, discipline, risk management, investing, markets",
+           caption:"It's not your strategy. You cut winners early and let losers run, and that's the whole problem. One rule fixes it, and it's in my profile.\n\nComment 'me' if you've done it 👇\n\n#shorts #trading #optionstrading #tradingpsychology #stockmarket",
+           first:"Comment 'me' if you've let a loss run too long 👇"},
+       tt:{caption:"Nobody wants to hear this: it's not your strategy losing you money, it's you holding losers and dumping winners. One rule fixes it, it's in my profile.\n\nComment 'me' if you've been there 👇\n\n#trading #optionstrading #stockmarket #fyp #tradingpsychology #foryou #markets",
+           first:"Comment 'me' if you've been there 👇"},
      }},
     {id:"vkarty",niche:"tarot",title:"Три карты: выберите, к которой потянуло",date:"21.08",
      files:{reel:{name:"tarot_2026-08-21_karty_reel.mp4",loc:"TG · Склад · 21.08"},
