@@ -442,10 +442,11 @@ const ICONS={
   bolt:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>',
   chev:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>',
 };
-const NICHE_COLOR={tarot:"#C061FF", neuro:"#4D7CFF"};
+const NICHE_COLOR={tarot:"#C061FF", neuro:"#4D7CFF", tom:"#C81E3A"};
 const THUMB_GRAD={
   tarot:"linear-gradient(150deg,#C061FF,#5a1f8f)",
   neuro:"linear-gradient(150deg,#4D7CFF,#1c2f8f)",
+  tom:"linear-gradient(150deg,#C81E3A,#5c0f0a)",
 };
 const mKey=()=>new Date().toLocaleDateString("en-CA",{timeZone:"Europe/Moscow"});
 const mShort=()=>new Date().toLocaleDateString("ru-RU",{timeZone:"Europe/Moscow",day:"2-digit",month:"2-digit"});
@@ -458,6 +459,7 @@ const mTime=()=>new Date().toLocaleTimeString("ru-RU",{timeZone:"Europe/Moscow",
    ============================================================ */
 const CONTENT={
   niches:[
+    {id:"tom",name:"Том",tag:"опционы"},
     {id:"tarot",name:"Таро",tag:"эзотерика"},
     {id:"neuro",name:"ИИ",tag:"Нейро·Утро"},
   ],
@@ -470,10 +472,31 @@ const CONTENT={
     {id:"vk",name:"VK Клипы",code:"VK"},
   ],
   cadence:{
+    tom:{ig:"1/день",yt:"1/день",tt:"1/день"},
     tarot:{ig:"1/день",ig2:"1/день",yt:"1/день",tt:"1/день",tt2:"1/день",vk:"1/день"},
     neuro:{ig:"1/день",yt:"1/день",tt:"1/день",vk:"1/день"},
   },
   videos:[
+    {id:"tom-smallwins",niche:"tom",title:"Small wins, big losses — почему счёт тает",date:"25.08",
+     files:{reel:{name:"tom_2026-08-25_smallwins_{ig,tt,yt}.mp4 (газета, уникализировано)",loc:"~/YouTube/options/reel-01-90options/ → залить в TG Склад"},
+            cover:{name:"tom_2026-08-25_smallwins_cover.jpg",loc:"там же"}},
+     note:"🎯 Газетный визуал (приоритет ниши). Тексты на EN — язык аудитории. Звук/голос Тома. Под каждую площадку своя уникализированная версия (не дубли). ⚠️ TikTok: в публичных комментах БЕЗ ссылок/«free»/«link» (шадоу-бан) — бот/ссылку даём только через шапку профиля; CTA в подписи = «it's all in my profile». Вовлечение = коммент «me».",
+     replies:[
+       "Yep — classic loss-aversion trap. The one rule that kills it is in my profile 👊",
+       "You're not the only one, trust me. The fix is one line, it's in my profile.",
+       "Been there more than I'll admit. Grab the rule in my profile 👇",
+       "Right on the trade and still red? That's the exact trap. Fix's in my profile."
+     ],
+     targets:{
+       ig:{caption:"You cash every small win, then hold a loser till it bleeds out. That's why your account keeps shrinking, and no, it's not your strategy.\n\nThere's one rule that flips this, and you set it before you even open the trade. It's all in my profile.\n\nBe honest: ever been right on a trade and still lost money? Comment 'me' 👇\n\n#options #optionstrading #trading #stockmarket #daytrading #tradingpsychology #investing #stocks",
+           first:"Right on the trade and still lost? Comment 'me' 👇 the fix is in my profile."},
+       yt:{ttl:"📉 Why You Lose Money Even When You're RIGHT 💸📈",
+           tags:"options trading, trading psychology, stock market, day trading, risk management, cut losses let winners run, trading mistakes, how to trade options, stocks for beginners, investing",
+           caption:"You take profits too early and let your losses run, so the account bleeds. One rule fixes it, and it's all in my profile.\n\nRight on the trade and still lost? Comment 'me' 👇\n\n#shorts #options #optionstrading #trading #stockmarket #tradingpsychology",
+           first:"Right and still lost money? Comment 'me' 👇"},
+       tt:{caption:"You cash small wins and hold losers till they bleed 💀 that's why you're down, and it's not your strategy. One rule flips it, and it's all in my profile.\n\nRight on the trade and still lost? Comment 'me' 👇\n\n#options #optionstrading #trading #stockmarket #fyp #foryou #tradingpsychology #money",
+           first:"Right and still lost? Drop a 'me' 👇"},
+     }},
     {id:"vkarty",niche:"tarot",title:"Три карты: выберите, к которой потянуло",date:"21.08",
      files:{reel:{name:"tarot_2026-08-21_karty_reel.mp4",loc:"TG · Склад · 21.08"},
             cover:{name:"tarot_2026-08-21_karty_cover.jpg",loc:"TG · Склад · 21.08"}},
