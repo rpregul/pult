@@ -164,6 +164,9 @@
     color:var(--ink);text-shadow:0 0 16px rgba(var(--neon-rgb),.5)}
   .vupd{font-size:10px;color:var(--faint);font-weight:600;text-align:right;line-height:1.5;flex:0 0 auto}
   .vsub{font-size:10.5px;color:var(--faint);font-weight:600;margin-top:3px}
+  .legend{display:flex;gap:14px;margin:2px 0 6px;flex-wrap:wrap}
+  .legend span{display:flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;color:var(--muted)}
+  .legend i{width:11px;height:3px;border-radius:2px;display:inline-block}
   .lchart{width:100%;height:auto;display:block;overflow:visible;touch-action:manipulation}
   .lline{filter:drop-shadow(0 0 5px rgba(var(--neon-rgb),.8))}
   .ldot{fill:var(--neon);stroke:var(--bg0);stroke-width:1.5}
@@ -775,15 +778,21 @@ const CONTENT={
 
 /* Реальные метрики (снимок Composio, обновляю при заносе). tarot = @vera_tarologinya.
    daily.v = дневной ОХВАТ аккаунта (уникальные зрители/день, time_series reach). */
+/* Просмотры по видео, сведённые по дате контента: ig (Composio), yt+tt (скрины). Один ролик = все площадки в один день. */
 const VIEWS={
-  tarot:{ updated:"24.08", totalViews:19035, reachTotal:15568, firstSale:20000, nextGoal:50000,
-    daily:[ {d:"17.08",v:0},{d:"18.08",v:0},
-            {d:"19.08",v:1482},{d:"20.08",v:3996},{d:"21.08",v:3150},{d:"22.08",v:2181},{d:"23.08",v:4105},{d:"24.08",v:464} ] },
+  tarot:{ updated:"26.08",
+    daily:[ {d:"19.08",ig:2702,yt:745,tt:448},
+            {d:"20.08",ig:7585,yt:0,tt:0},
+            {d:"21.08",ig:1252,yt:2416,tt:101858},
+            {d:"22.08",ig:9603,yt:0,tt:0},
+            {d:"23.08",ig:0,yt:1224,tt:0},
+            {d:"24.08",ig:871,yt:1251,tt:348},
+            {d:"25.08",ig:1580,yt:716,tt:1040} ] },
 };
 /* Динамика подписчиков (снимок Composio). points = кумулятивно по дням; perDay = темп для вектора. */
 const FOLLOWERS={
-  tarot:{ current:144, goal:1000, perDay:15, etaLabel:"≈ 20.10", updated:"24.08", moneyAt:"~5 000 ₽/мес",
-    points:[ {d:"18.08",v:51},{d:"19.08",v:61},{d:"20.08",v:97},{d:"21.08",v:129},{d:"22.08",v:144},{d:"23.08",v:144},{d:"24.08",v:144} ] },
+  tarot:{ current:185, goal:1000, perDay:18, etaLabel:"≈ 10.10", updated:"26.08", moneyAt:"~5 000 ₽/мес",
+    points:[ {d:"19.08",v:61},{d:"20.08",v:97},{d:"21.08",v:129},{d:"22.08",v:143},{d:"23.08",v:157},{d:"24.08",v:170},{d:"25.08",v:178},{d:"26.08",v:185} ] },
 };
 
 const LS="pult_v3";
@@ -919,6 +928,28 @@ function lineChart(daily){
     ${dots}${vlab}${labs}${hits}</svg>`;
 }
 
+function multiLineChart(daily){
+  const W=340,H=152,padL=8,padR=12,padT=22,padB=22;
+  const S=[{k:"total",c:"#EAEAFF"},{k:"ig",c:"var(--neon)"},{k:"tt",c:"#FF4D9D"}];
+  const val=(d,k)=> k==="total"?(d.ig+d.yt+d.tt):d[k];
+  let mx=0; daily.forEach(d=>S.forEach(s=>{ const v=val(d,s.k); if(v<=12000&&v>mx)mx=v; }));
+  const cap=Math.max(mx*1.12,1), n=daily.length;
+  const X=i=> padL+(W-padL-padR)*(n<2?.5:i/(n-1));
+  const Y=v=> padT+(H-padT-padB)*(1-Math.min(v,cap)/cap);
+  let o=`<svg class="lchart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">`;
+  S.forEach(s=>{
+    const pts=daily.map((d,i)=>[X(i),Y(val(d,s.k)),val(d,s.k)]);
+    o+=`<path d="${pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ")}" fill="none" stroke="${s.c}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>`;
+    pts.forEach(p=>{ o+=`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="2.3" fill="${s.c}"/>`;
+      if(p[2]>cap && s.k==="total") o+=`<text x="${Math.min(p[0],W-20).toFixed(1)}" y="${(p[1]-5).toFixed(1)}" text-anchor="middle" style="fill:${s.c};font-size:9px;font-weight:800;font-family:'JetBrains Mono',monospace">${Math.round(p[2]/1000)}k🚀</text>`; });
+  });
+  daily.forEach((d,i)=>{
+    o+=`<text class="lx" x="${X(i).toFixed(1)}" y="${H-6}" text-anchor="middle">${d.d}</text>`;
+    o+=`<rect class="lhit" x="${(X(i)-16).toFixed(1)}" y="0" width="32" height="${H-14}" fill="transparent" data-d="${d.d}" data-v="${d.ig+d.yt+d.tt}" data-u="всего · IG ${d.ig} · YT ${d.yt} · TT ${d.tt}"/>`;
+  });
+  return o+"</svg>";
+}
+
 function growthChart(f){
   const W=320,H=152,padL=8,padR=34,padT=16,padB=22;
   const pts=f.points, n=pts.length, cur=pts[n-1].v, goal=f.goal;
@@ -1004,20 +1035,16 @@ function viewToday(){
   const vd=VIEWS[an];
   let viewsCard="";
   if(vd){
-    const salePct=Math.min(100,Math.round(vd.reachTotal/vd.firstSale*100));
-    const saleRem=Math.max(0,vd.firstSale-vd.reachTotal);
+    const g7=vd.daily.slice(-7).reduce((s,d)=>s+d.ig+d.yt+d.tt,0);
+    const ttSum=vd.daily.reduce((s,d)=>s+d.tt,0);
     viewsCard=`<div class="vcard">
-      <div class="vhead"><div><div class="eyebrow">Охват по дням</div>
-        <div class="vtotal mono">${vd.reachTotal.toLocaleString("ru-RU")}</div>
-        <div class="vsub">уникальных зрителей · всего просмотров ${vd.totalViews.toLocaleString("ru-RU")}</div></div>
+      <div class="vhead"><div><div class="eyebrow">Просмотры · все площадки</div>
+        <div class="vtotal mono">${g7.toLocaleString("ru-RU")}</div>
+        <div class="vsub">за 7 дней · IG + YouTube + TikTok</div></div>
         <div class="vupd">снимок ${vd.updated}<br>@vera_tarologinya</div></div>
-      ${lineChart(vd.daily)}
-      <div class="vgoal">
-        <div class="goal-top"><span>До первой продажи</span>
-          <span class="rem">~${vd.firstSale/1000}k · <b>ещё ${saleRem.toLocaleString("ru-RU")}</b></span></div>
-        <div class="goaltrack"><span class="fill" style="width:${salePct}%"></span><span class="rest" style="left:${salePct}%;width:${100-salePct}%"></span></div>
-        <div class="goal-cap">Первую продажу ждём к <b>20k</b>. Стабильные продажи — к <b>50k</b>.</div>
-      </div>
+      <div class="legend"><span><i style="background:#EAEAFF"></i>Всего</span><span><i style="background:var(--neon)"></i>Instagram</span><span><i style="background:#FF4D9D"></i>TikTok</span></div>
+      ${multiLineChart(vd.daily)}
+      <div class="goal-cap" style="margin-top:12px">🚀 Прорыв — <b>TikTok «Весы»: 101k</b> (весь остальной контент 1–10k). TikTok = твой канал, гони туда этот формат. Тапни день на графике — покажу разбивку.</div>
     </div>`;
   } else {
     viewsCard=`<div class="vcard vempty"><div class="eyebrow">Охват</div><p>Для ниши «${nObj.name}» статистика ещё не подключена — подключим аккаунт, и я потяну охват по дням.</p></div>`;
